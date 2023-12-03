@@ -1,0 +1,24 @@
+apiVersion: v1
+baseDomain: example.in       ## update baseDomain with your domain name        
+compute: 
+- hyperthreading: Enabled 
+  name: worker
+  replicas: 0 
+controlPlane: 
+  hyperthreading: Enabled 
+  name: master
+  replicas: 3               ## if you want deploy more master nodes you change replica value 
+metadata:
+  name: ocp4                ## update with cluster name 
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14     ## check if any confilict with your env ,if required change IP cidr 
+    hostPrefix: 23 
+  networkType: OpenShiftSDN
+  serviceNetwork: 
+  - 172.30.0.0/16            ## check if any confilict with your env ,if required change IP cidr 
+platform:
+  none: {} 
+fips: false 
+pullSecret: '{"auths": ...}'    ## Paste downladed pull secret 
+sshKey: 'ssh-key'   ## Paste ssh key
